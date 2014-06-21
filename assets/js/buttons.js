@@ -1,5 +1,4 @@
 $(function() {
-
     var $foodBtn = $('#food');
     var $spotBtn = $('#spot');
     var $convBtn = $('#conv');
@@ -95,4 +94,37 @@ $(function() {
             case "wifi": app.service.wifi(); break;
         }
     });
+    
+    var iniSearch = function() {
+        var defaultFuseOpt = {
+            keys: [],
+            threshold: 0.1
+        };
+        var setFilter = function(group, keyName, newFuseOption, searchInput) {
+            var options = $.extend(true, {}, defaultFuseOpt, newFuseOption);
+            var result = (new Fuse(window[keyName], options)).search($(searchInput).val());
+                if($(searchInput).val() != "") {
+                    $("#main").html("");
+                }
+                else {
+                    $("#sub-class").trigger("change");
+                }
+                app[group][keyName](result);
+        };
+        $('#search').keyup(function(e) {
+            var currentSubClass = $('#sub-class').prev().text();
+            if (e.keyCode !== 38 && e.keyCode !== 40 ) {
+                 if (currentSubClass === '店家') setFilter('food', 'dining', {keys: ['餐飲店家名稱', '店家簡述']}, this);
+                 if (currentSubClass === '餐廳') setFilter('food', 'restaurant', {keys: ['餐廳名稱']}, this);
+                 if (currentSubClass === '夜市') setFilter('food', 'nightmarket', {keys: ['夜市名','區別']}, this);
+
+                 if (currentSubClass === '古蹟') setFilter('spot', 'interestingPlace', {keys: ['個案名稱']}, this);   //need modify keyName and options
+                 if (currentSubClass === '寺廟') setFilter('spot', 'temple', {keys: ['寺廟名稱']}, this);   //need modify keyName and options
+
+                 if (currentSubClass === '廁所') setFilter('service', 'toilet', {keys: ['地址或地點描述', '最新公廁級別', '公廁名稱']}, this);
+                 if (currentSubClass === 'Wifi') setFilter('service', 'wifi', {keys: ['臺南市無線網路熱點名稱', '熱點地址']}, this);         
+            }
+        });
+    };
+    iniSearch();
 });

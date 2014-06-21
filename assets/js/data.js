@@ -14,7 +14,7 @@ var app = {
 		var data = {
 			"美食": {
 				"店家": "assets/json/food_dining.json",
-            	"餐廳": "http://data.tainan.gov.tw/api/action/datastore_search?resource_id=a4dda55a-6ffb-4423-b968-471de89c779f&limit=100",
+            	"餐廳": "assets/json/food_restaurant.json",
             	"夜市": "assets/json/food_nightmarket.json"
             },
             "景點": {
@@ -50,26 +50,16 @@ var app = {
 
 	},
 	food: {
-		dining: function () {
-			var data = window["dining"];
-			var checkit = function (onoff) {
-				if(onoff == 1)
-					return 'O';
-				else 
-					return 'X';
-			};
-
+		dining: function (data) {
+			var data = data || window["dining"];
+			
 			$("#main").append('<div id="dining" data-role="collapsible-set" data-filter="true" data-input="#search"></div>');
 			$("#dining").collapsibleset();
 
 			$.each(data, function(key, val) {
 
 				var bd = val["營業時間"].split("*");
-				// var table = '<table data-role="table" class="ui-responsive ui-table ui-table-reflow">';
-				// table += "<tr><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th><th>日</th>";
-				// table += '<tr><td>'+checkit(bd[0])+'　'+checkit(bd[1])+'　'+checkit(bd[2])+'　'+checkit(bd[3])+'　'+checkit(bd[4])+'　'+checkit(bd[5])+'　'+checkit(bd[6])+'</td>';
-				// table += '</table>';
-
+				
 				$("#dining").append(
 					'<div data-role="collapsible">'+
 					'	<h3>'+val["餐飲店家名稱"]+'</h3>'+//table+
@@ -85,12 +75,12 @@ var app = {
 				}
 			})
 		},
-		restaurant: function () {
-			var data = window["restaurant"];
+		restaurant: function (data) {
+			var data = data || window["restaurant"];
 			$("#main").append('<div id="restaurant" data-role="collapsible-set" data-filter="true" data-input="#search"></div');
 			$("#restaurant").collapsibleset();
 
-			$.each(data.result.records, function(key, val) {
+			$.each(data, function(key, val) { //data.result.records
 				$("#restaurant").append(
 					'<div data-role="collapsible">'+
 					'	<h3>'+val["餐廳名稱"]+'</h3>'+
@@ -99,13 +89,13 @@ var app = {
 					'	</p>'+
 					'</div>'
 				)
-				if(key == data.result.records.length - 1) {
+				if(key == data.length - 1) { //result.records.length
 					$("#restaurant").collapsibleset("refresh");
 				}
 			})
 		},
-		nightmarket: function () {
-			var data = window["nightmarket"];
+		nightmarket: function (data) {
+			var data = data || window["nightmarket"];
 			$("#main").append('<ul id="nightmarket" data-role="listview" data-filter="true" data-input="#search" data-inset="true"></ul>');
 			$("#nightmarket").listview();
 			
@@ -116,12 +106,12 @@ var app = {
 				if(key == data.length - 1) {
 					$("#nightmarket").listview("refresh");
 				}
-			})
+			});
 		}
 	},
 	spot: {
-		interestingPlace: function () {
-			var data = window["interestingPlace"];
+		interestingPlace: function (data) {
+			var data = data || window["interestingPlace"];
 			$("#main").append('<div id="interestingPlace" data-role="collapsible-set" data-filter="true" data-input="#search"></div');
 			$("#interestingPlace").collapsibleset();
 
@@ -140,8 +130,8 @@ var app = {
 				}
 			})
 		},
-		temple: function () {
-			var data = window["temple"];
+		temple: function (data) {
+			var data = data || window["temple"];
 			$("#main").append('<ul id="temple" data-role="listview" data-filter="true" data-input="#search" data-inset="true"></ul>');
 			$("#temple").listview();
 			
@@ -156,8 +146,8 @@ var app = {
 		}
 	},
 	service: {
-		toilet: function () {
-			var data = window["toilet"];
+		toilet: function (data) {
+			var data = data || window["toilet"];
 			$("#main").append('<ul id="toilet" data-role="listview" data-filter="true" data-input="#search" data-inset="true"></ul>');
 			$("#toilet").listview();
 			
@@ -170,8 +160,8 @@ var app = {
 				}
 			})
 		},
-		wifi: function () {
-			var data = window["wifi"];
+		wifi: function (data) {
+			var data = data || window["wifi"];
 			$("#main").append('<ul id="wifi" data-role="listview" data-filter="true" data-input="#search" data-inset="true"></ul>');
 			$("#wifi").listview();
 			
