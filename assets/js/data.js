@@ -3,9 +3,9 @@ var app = {
 		var root = this;
 		var data = {
 			"美食": {
-				"店家": "assets/json/food_dining.json",
-            	"餐廳": "http://data.tainan.gov.tw/api/action/datastore_search?resource_id=a4dda55a-6ffb-4423-b968-471de89c779f&limit=100",
-            	"夜市": "assets/json/food_nightmarket.json"
+				"店家": "http://localhost/food_dining.json",
+            	"餐廳": "http://localhost/food_restaurant.json",
+            	"夜市": "http://localhost/food_nightmarket.json"
             },
             "景點": {},
             "便民": {}
@@ -27,8 +27,8 @@ var app = {
 
 	},
 	food: {
-		dining: function () {
-			var data = window["dining"];
+		dining: function (data) {
+			var data = data || window["dining"];
 			var checkit = function (onoff) {
 				if(onoff == 1)
 					return 'O';
@@ -63,12 +63,12 @@ var app = {
 				}
 			})
 		},
-		restaurant: function () {
-			var data = window["restaurant"];
+		restaurant: function (data) {
+			var data = data || window["restaurant"];
 			$("#main").append('<div id="restaurant" data-role="collapsible-set" data-filter="true" data-input="#search"></div');
 			$("#restaurant").collapsibleset();
 
-			$.each(data.result.records, function(key, val) {
+			$.each(data, function(key, val) { //data.result.records
 				$("#restaurant").append(
 					'<div data-role="collapsible">'+
 					'	<h3>'+val["餐廳名稱"]+'</h3>'+
@@ -77,13 +77,13 @@ var app = {
 					'	</div>'+
 					'</div>'
 				)
-				if(key == data.result.records.length - 1) {
+				if(key == data.length - 1) { //result.records.length
 					$("#restaurant").collapsibleset("refresh");
 				}
 			})
 		},
-		nightmarket: function () {
-			var data = window["nightmarket"];
+		nightmarket: function (data) {
+			var data = data || window["nightmarket"];
 			$("#main").append('<ul id="nightmarket" data-role="listview" data-filter="true" data-input="#search" data-inset="true"></ul>');
 			$("#nightmarket").listview();
 			
