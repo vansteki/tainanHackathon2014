@@ -89,4 +89,34 @@ $(function() {
         };
     };
     iniBasicUI();
+    
+    var iniSearch = function() {
+        var defaultFuseOpt = {
+            keys: [],
+            threshold: 0.1
+    };
+
+    var setFilter = function(keyName, newFuseOption, searchInput) {
+        var options = $.extend(true, {}, defaultFuseOpt, newFuseOption);
+        var result = (new Fuse(window[keyName], options)).search($(searchInput).val());
+            $("#main").html('');
+            app.food[keyName](result);
+            console.log(keyName, result);
+    };
+    $('#search').keyup(function(e) {
+        var currentSubClass = $('#sub-class').prev().text();
+        if (e.keyCode !== 38 && e.keyCode !== 40 ) {
+             if (currentSubClass === '店家') setFilter('dining', {keys: ['餐飲店家名稱', '店家簡述']}, this);
+             if (currentSubClass === '餐廳') setFilter('restaurant', {keys: ['餐廳名稱']}, this);
+             if (currentSubClass === '夜市') setFilter('nightmarket', {keys: ['夜市名','區別']}, this);
+
+             if (currentSubClass === '古蹟') setFilter({keys: ['']}, this);   //need modify keyName and options
+             if (currentSubClass === '寺廟') setFilter({keys: ['']}, this);   //need modify keyName and options
+
+             if (currentSubClass === '廁所') setFilter({keys: ['地地址或點描述']}, this);
+             if (currentSubClass === 'Wifi') setFilter({keys: ['臺南市無線網路熱點名稱', '熱點地址']}, this);         
+        }
+    });        
+    };
+    iniSearch();
 });
