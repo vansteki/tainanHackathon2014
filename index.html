@@ -6,34 +6,37 @@
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/jquery.mobile-1.4.2/jquery.mobile-1.4.2.min.js"></script>
 	<link href="assets/jquery.mobile-1.4.2/jquery.mobile-1.4.2.min.css" rel="stylesheet" type="text/css">
+
 	<link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<script src="assets/js/bootstrap.min.js"></script>
+
 	<script src="assets/js/buttons.js"></script>
 </head>
 <body>
-<div id='container'>
-<form id='search-form' class='hidden'>
-<fieldset data-role="controlgroup">
-    <label for="sub-class">subClass</label>
-    <select id="sub-class" name="sub-class">
-    	<option>Choose...</option>
-    </select>
-</fieldset>
-    <input  type="search" name="search" id="search" value="">
-</form>
 
-<button id='food' class="ui-btn ui-corner-all">美食</button>
-<button id='spot' class="ui-btn ui-corner-all">景點</button>
-<button id='conv' class="ui-btn ui-corner-all">便民</button>
-
-<div id='search-result'></div>	
-
-<div class='navLink hidden' data-role="navbar">
-	<ul>
-		<li><a id='prev-link' href="#" data-icon="arrow-l">Prev</a></li>
-		<!-- <li><a href="#" data-icon="arrow-r"></a></li> -->
-	</ul>
-</div><!-- /navbar -->
-</div><!-- end of main container-->
+	<div data-role="page">
+        <div data-role="header">
+        	<div data-role="navbar">
+                <ul>
+                    <li><a id="home" href="#">Tainan Search</a></li>
+                </ul>
+            </div>
+        </div>
+        <div data-role="content" class="Center-Container">
+        	<form id='search-form' class='hidden'>
+				<div class="ui-field-contain">
+				    <select id="sub-class" name="sub-class">
+				    	<option>Choose...</option>
+				    </select>
+				</div>
+			    <input data-type="search" id="search" value="">
+			</form>
+        	<button id='food' class="ui-btn ui-corner-all">美食</button>
+			<button id='spot' class="ui-btn ui-corner-all">景點</button>
+			<button id='conv' class="ui-btn ui-corner-all">便民</button>
+			<div id="main" class="hidden"></div>
+        </div>
+    </div>
+    <script src="assets/js/data.js"></script>
 </body>
 </html>
