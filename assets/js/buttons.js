@@ -1,4 +1,5 @@
 $(function() {
+$("form").submit(function(e){ return false; });
 
 var iniBasicUI = function() {
     var $foodBtn = $('#food');
