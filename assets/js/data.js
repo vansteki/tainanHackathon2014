@@ -94,7 +94,29 @@ var app = {
 				if(key == data.length - 1) {
 					$("#nightmarket").listview("refresh");
 				}
-			})
+			});
+		}
+	},
+	spot: {
+		historybuilding: function() {},
+		temple: function() {}
+	},
+	conv: {
+		toilet: function(data) {
+			var data = data || window["toilet"];
+		},
+		wifi: function(data) {
+			var data = data || window["wifi"];
+			$("#main").append('<ul id="wifi" data-role="listview" data-filter="true" data-input="#search" data-inset="true"></ul>');
+			$("#wifi").listview();
+			$.each(data, function(key, val) {
+				$("#wifi").append(
+					//'<li><a href="'+val["地圖"]+'" target="_blank">'+val["區別"]+' - '+val["夜市名"]+'</a></li>'
+				)
+				if(key == data.length - 1) {
+					$("#wifi").listview("refresh");
+				}
+			});	
 		}
 	}
 };
