@@ -13,17 +13,17 @@ var app = {
 		var root = this;
 		var data = {
 			"美食": {
-				"店家": "assets/json/food_dining.json",
-            	"餐廳": "assets/json/food_restaurant.json",
-            	"夜市": "assets/json/food_nightmarket.json"
+				"店家": "http://localhost/food_dining.json",
+            	"餐廳": "http://localhost/food_restaurant.json",
+            	"夜市": "http://localhost/food_nightmarket.json"
             },
             "景點": {
-            	"古蹟": "assets/json/spot_interestingPlace.json",
-            	"寺廟": "assets/json/spot_temple.json"
+            	"古蹟": "http://localhost/spot_interestingPlace.json",
+            	"寺廟": "http://localhost/spot_temple.json"
             },
             "便民": {
             	"廁所": "http://data.tainan.gov.tw/api/action/datastore_search?resource_id=bde652b1-90d8-4b90-8ab4-f8bdc19242fc&limit=100",
-            	"Wifi": "assets/json/service_wifi.json"
+            	"Wifi": "http://localhost/service_wifi.json"
             }
         };
 

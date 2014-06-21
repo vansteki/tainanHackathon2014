@@ -30,7 +30,7 @@ $(function() {
             $subClass.html('');
             $subClass.prev().text('廁所');
             $subClass.append($('<option>').text('廁所').prop("value", "toilet"));
-            $subClass.append($('<option>').text('Wifi ').prop("value", "wifi"));
+            $subClass.append($('<option>').text('Wifi').prop("value", "wifi"));
             $subClass.trigger("change");
         });
         $navLink.click(function() {
@@ -85,7 +85,7 @@ $(function() {
     $("#sub-class").change(function () {
         $("#main").text("");
         switch($(this).find("option:selected").prop("value")) {
-            case "dining": app.food.dining(); break;
+            case "dining"   : app.food.dining(); break;
             case "restaurant": app.food.restaurant(); break;
             case "nightmarket": app.food.nightmarket(); break;
             case "interestingPlace": app.spot.interestingPlace(); break;
@@ -102,7 +102,9 @@ $(function() {
         };
         var setFilter = function(group, keyName, newFuseOption, searchInput) {
             var options = $.extend(true, {}, defaultFuseOpt, newFuseOption);
+            console.log(options);
             var result = (new Fuse(window[keyName], options)).search($(searchInput).val());
+                console.log(result, window[keyName], options, $(searchInput).val());
                 if($(searchInput).val() != "") {
                     $("#main").html("");
                 }
@@ -120,9 +122,9 @@ $(function() {
 
                  if (currentSubClass === '古蹟') setFilter('spot', 'interestingPlace', {keys: ['個案名稱']}, this);   //need modify keyName and options
                  if (currentSubClass === '寺廟') setFilter('spot', 'temple', {keys: ['寺廟名稱']}, this);   //need modify keyName and options
-
+                
                  if (currentSubClass === '廁所') setFilter('service', 'toilet', {keys: ['地址或地點描述', '最新公廁級別', '公廁名稱']}, this);
-                 if (currentSubClass === 'Wifi') setFilter('service', 'wifi', {keys: ['臺南市無線網路熱點名稱', '熱點地址']}, this);         
+                 if (currentSubClass == 'Wifi') setFilter('service', 'wifi', {keys: ['台南市地區','臺南市無線網路熱點名稱']}, this);
             }
         });
     };
