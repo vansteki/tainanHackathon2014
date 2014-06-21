@@ -7,8 +7,14 @@ var app = {
             	"餐廳": "http://localhost/food_restaurant.json",
             	"夜市": "http://localhost/food_nightmarket.json"
             },
-            "景點": {},
-            "便民": {}
+            "景點": {
+				"古蹟": "",
+				"寺廟": ""
+			},
+            "便民": {
+				"廁所": "",
+				"wifi": ""
+			}
         };
 
         var requestQueue = [];
@@ -19,6 +25,13 @@ var app = {
 		getjson(data["美食"]["店家"], "dining");
 		getjson(data["美食"]["餐廳"], "restaurant");
 		getjson(data["美食"]["夜市"], "nightmarket");
+
+		getjson(data["景點"]["古蹟"], "historyBuilding");
+		getjson(data["景點"]["寺廟"], "temple");
+
+		getjson(data["便民"]["廁所"], "toilet");
+		getjson(data["便民"]["wifi"], "wifi");
+
 
 		$.when.apply($, requestQueue).then(function(data) {
 			console.log("Test")
@@ -98,7 +111,7 @@ var app = {
 		}
 	},
 	spot: {
-		historybuilding: function() {},
+		historyBuilding: function() {},
 		temple: function() {}
 	},
 	conv: {

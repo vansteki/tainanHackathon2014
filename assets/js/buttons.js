@@ -110,11 +110,11 @@ $(function() {
              if (currentSubClass === '餐廳') setFilter('restaurant', {keys: ['餐廳名稱']}, this);
              if (currentSubClass === '夜市') setFilter('nightmarket', {keys: ['夜市名','區別']}, this);
 
-             if (currentSubClass === '古蹟') setFilter({keys: ['']}, this);   //need modify keyName and options
-             if (currentSubClass === '寺廟') setFilter({keys: ['']}, this);   //need modify keyName and options
+             if (currentSubClass === '古蹟') setFilter('historyBuilding', {keys: ['個案名稱']}, this);   //need modify keyName and options
+             if (currentSubClass === '寺廟') setFilter('temple', {keys: ['寺廟名稱']}, this);   //need modify keyName and options
 
-             if (currentSubClass === '廁所') setFilter({keys: ['地地址或點描述']}, this);
-             if (currentSubClass === 'Wifi') setFilter({keys: ['臺南市無線網路熱點名稱', '熱點地址']}, this);         
+             if (currentSubClass === '廁所') setFilter('toilet', {keys: ['地地址或點描述']}, this);
+             if (currentSubClass === 'Wifi') setFilter('wifi', {keys: ['臺南市無線網路熱點名稱', '熱點地址']}, this);         
         }
     });        
     };
