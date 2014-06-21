@@ -2,7 +2,8 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>台南便利旅遊快搜</title>
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/jquery.mobile-1.4.2/jquery.mobile-1.4.2.min.js"></script>
 	<link href="assets/jquery.mobile-1.4.2/jquery.mobile-1.4.2.min.css" rel="stylesheet" type="text/css">
@@ -11,14 +12,30 @@
 	<script src="assets/js/bootstrap.min.js"></script>
 
 	<script src="assets/js/buttons.js"></script>
+
+	<style type="text/css">
+		th, td {
+			font-size: 18px;
+			padding: 5px;
+		}
+		p {
+			font-size: 18px;
+			line-height: 36px;
+		}
+		#mask {
+			width: 100%;
+			height: 100%;
+			background-color: grey;
+			opacity: .5;
+		}
+	</style>
 </head>
 <body>
-
 	<div data-role="page">
         <div data-role="header">
         	<div data-role="navbar">
                 <ul>
-                    <li><a id="home" href="#">Tainan Search</a></li>
+                    <li><a id="home" href="#" class="ui-btn ui-icon-home ui-btn-icon-top hidden"><h4>台南便利旅遊快搜</h4></a></li>
                 </ul>
             </div>
         </div>
@@ -31,9 +48,9 @@
 				</div>
 			    <input data-type="search" id="search" value="">
 			</form>
-        	<button id='food' class="ui-btn ui-corner-all">美食</button>
-			<button id='spot' class="ui-btn ui-corner-all">景點</button>
-			<button id='conv' class="ui-btn ui-corner-all">便民</button>
+        	<button id='food' class="ui-btn ui-corner-all hidden">美食</button>
+			<button id='spot' class="ui-btn ui-corner-all hidden">景點</button>
+			<button id='conv' class="ui-btn ui-corner-all hidden">便民</button>
 			<div id="main" class="hidden"></div>
         </div>
     </div>
