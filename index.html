@@ -12,14 +12,34 @@
 <fieldset data-role="controlgroup">
     <label for="sub-class">subClass</label>
     <select id="sub-class">
-        <option value="#">One</option>
-        <option value="#">Two</option>
-        <option value="#">Three</option>
+    	<option>Choose...</option>
     </select>
 </fieldset>
 </form>
 <button id='food' class="ui-btn ui-corner-all">美食</button>
 <button id='spot' class="ui-btn ui-corner-all">景點</button>
 <button id='conv' class="ui-btn ui-corner-all">便民</button>
+<script>
+	$(function() {
+		//button events
+		var $subClass = $('#sub-class');
+		$('#food').click(function() {
+		    $subClass.html('');
+		    $subClass.append($('<option>').text('店家'));
+		    $subClass.append($('<option>').text('餐廳'));
+		    $subClass.append($('<option>').text('夜市'));
+		});
+		$('#spot').click(function() {
+		    $subClass.html('');
+		    $subClass.append($('<option>').text('古蹟'));
+		    $subClass.append($('<option>').text('寺廟'));
+		});
+		$('#conv').click(function() {
+		    $subClass.html('');
+		    $subClass.append($('<option>').text('廁所'));
+		    $subClass.append($('<option>').text('Wifi '));
+		});		
+	});
+</script>
 </body>
 </html>
