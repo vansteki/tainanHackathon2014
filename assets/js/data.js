@@ -6,7 +6,7 @@ var app = {
 		$.mobile.loading("show", {
 			text: "資料讀取中",
 			textVisible: true,
-			theme: "b",
+			theme: "c",
 			html: ""
 		});
 
@@ -119,7 +119,7 @@ var app = {
 					'<div data-role="collapsible">'+
 					'	<h3 id="interestingPlace-'+key+'">'+val["個案名稱"]+'</h3>'+
 					'	<p>種類級別：'+val["種類"]+' '+val["級別"]+'<br />'+
-					'		地理位置：<a href="http://maps.google.com/?q='+val["所在地理區域-縣市"]+val["所在地理區域-鄉鎮市"]+val["地址或位置"]+'">'+val["所在地理區域-縣市"]+val["所在地理區域-鄉鎮市"]+val["地址或位置"]+'</a>'+
+					'		地理位置：<a href="http://maps.google.com/?q='+val["所在地理區域-縣市"]+val["所在地理區域-鄉鎮市"]+val["地址或位置"]+'">'+val["所在地理區域-縣市"]+val["所在地理區域-鄉鎮市"]+val["地址或位置"]+'</a><br />'+
 					'		歷史沿革：<br />　　'+val["歷史沿革"]+
 					'	</p>'+
 					'</div>'

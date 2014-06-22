@@ -133,6 +133,7 @@ $(function() {
             }
             $subClass.find("option[value='"+subclass+"']").prop("selected", true).trigger("change");
             $("#search").prop("value", $(this).text()).trigger("keyup");
+            $("#history_panel").panel("close");
         })
     };
 
