@@ -21,22 +21,20 @@
 			font-size: 18px;
 			line-height: 36px;
 		}
-		#mask {
-			width: 100%;
-			height: 100%;
-			background-color: grey;
-			opacity: .5;
-		}
 	</style>
 </head>
 <body>
 	<div data-role="page">
-	<a href="https://www.facebook.com/dialog/oauth?client_id=1445594965702713&redirect_uri=http%3A%2F%2Fweb.thu.edu.tw%2Fs955740%2Fwww%2Ffb%2Flogin2.php">FBLINK</a>
-	<a href=""></a>
+		<div id="history_panel" data-role="panel" data-position="right" data-display="overlay">
+			<ul data-role="listview">
+			</ul>
+		</div>
         <div data-role="header">
-        	<div data-role="navbar">
+        	<div data-role="navbar" data-iconpos="top">
                 <ul>
-                    <li><a id="home" href="#" class="ui-btn ui-icon-home ui-btn-icon-top hidden"><h4>台南便利旅遊快搜</h4></a></li>
+                	<li><a href="https://www.facebook.com/dialog/oauth?client_id=1445594965702713&redirect_uri=http%3A%2F%2Fweb.thu.edu.tw%2Fs955740%2Fwww%2Ffb%2Flogin2.php" data-icon="star">我的最愛</a></li>
+                    <li><a id="home" href="#" data-icon="home">回到首頁</a></li>
+                    <li><a id="history" href="#" data-icon="tag">瀏覽歷史</a></li>
                 </ul>
             </div>
         </div>
@@ -49,9 +47,14 @@
 				</div>
 			    <input data-type="search" id="search" value="">
 			</form>
-        	<button id='food' class="ui-btn ui-corner-all hidden">美食</button>
-			<button id='spot' class="ui-btn ui-corner-all hidden">景點</button>
-			<button id='conv' class="ui-btn ui-corner-all hidden">便民</button>
+			<div class="ui-grid-b ui-responsive">
+			    <div class="ui-block-a">
+			    	<a id='food' href="#" class="ui-shadow ui-btn ui-corner-all hidden"><img src="assets/images/food.png" width="100" /><br />美食</a></div>
+			    <div class="ui-block-b">
+			    	<a id='spot' href="#" class="ui-shadow ui-btn ui-corner-all hidden"><img src="assets/images/spot.png" width="100" /><br />景點</a></div>
+			    <div class="ui-block-c">
+			    	<a id='conv' href="#" class="ui-shadow ui-btn ui-corner-all hidden"><img src="assets/images/conv.png" width="100" /><br />便民</a></div>
+			</div>
 			<div id="main" class="hidden"></div>
         </div>
     </div>

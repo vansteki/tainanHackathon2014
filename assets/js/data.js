@@ -49,17 +49,17 @@ var app = {
 		var root = this;
 		var data = {
 			"美食": {
-				"店家": "http://localhost/food_dining.json",
-            	"餐廳": "http://localhost/food_restaurant.json",
-            	"夜市": "http://localhost/food_nightmarket.json"
+				"店家": "assets/json/food_dining.json",
+            	"餐廳": "assets/json/food_restaurant.json",
+            	"夜市": "assets/json/food_nightmarket.json"
             },
             "景點": {
-            	"古蹟": "http://localhost/spot_interestingPlace.json",
-            	"寺廟": "http://localhost/spot_temple.json"
+            	"古蹟": "assets/json/spot_interestingPlace.json",
+            	"寺廟": "assets/json/spot_temple.json"
             },
             "便民": {
             	"廁所": "http://data.tainan.gov.tw/api/action/datastore_search?resource_id=bde652b1-90d8-4b90-8ab4-f8bdc19242fc&limit=100",
-            	"Wifi": "http://localhost/service_wifi.json"
+            	"Wifi": "assets/json/service_wifi.json"
             }
         };
 
@@ -77,7 +77,6 @@ var app = {
 		getjson(data["便民"]["Wifi"], "wifi");
 
 		$.when.apply($, requestQueue).then(function(data) {
-			$('#home').removeClass("hidden");
 			$('#food').removeClass("hidden");
 			$('#spot').removeClass("hidden");
 			$('#conv').removeClass("hidden");
@@ -98,12 +97,10 @@ var app = {
 				
 				$("#dining").append(
 					'<div data-role="collapsible">'+
-					'<h3>'+val["餐飲店家名稱"] + 
-					'<a class="show likeStar" href=' + "http://web.thu.edu.tw/s955740/www/fb/like.php?uid=" + localStorage.fbId + "&pid=" + val.id + "&like=1" + '>LIKE</a>' +
+					'	<h3 id="dining-'+key+'">'+val["餐飲店家名稱"]+'</h3>'+
+					'<p><a class="show likeStar" href=' + "http://web.thu.edu.tw/s955740/www/fb/like.php?uid=" + localStorage.fbId + "&pid=" + val.id + "&like=1" + '>LIKE</a>' +
 					'<a class="show unlikeStar" href=' + "http://web.thu.edu.tw/s955740/www/fb/like.php?uid=" + localStorage.fbId + "&pid=" + val.id + "&like=0" + '>UNLIKE</a>' +
-
-					'</h3>'+//table+
-					'	<p>營業時間：'+bd[7]+'<br />'+
+					'	營業時間：'+bd[7]+'<br />'+
 					'		店家地址：<a href="http://maps.google.com.tw/?q='+val["店家地址"]+'" target="_blank">'+val["店家地址"]+'</a><br />'+
 					'		店家電話：<a href="tel:'+val["店家電話"]+'">'+val["店家電話"]+'</a>'+
 					'	</p>'+
@@ -125,11 +122,10 @@ var app = {
 			$.each(data, function(key, val) { //data.result.records
 				$("#restaurant").append(
 					'<div data-role="collapsible">'+
-					'	<h3>'+val["餐廳名稱"]+
-					'<a class="show likeStar" href=' + "http://web.thu.edu.tw/s955740/www/fb/like.php?uid=" + localStorage.fbId + "&pid=" + val.id + "&like=1" + '>LIKE</a>' +
+					'	<h3 id="restaurant-'+key+'">'+val["餐廳名稱"]+'</h3>'+
+					'<p><a class="show likeStar" href=' + "http://web.thu.edu.tw/s955740/www/fb/like.php?uid=" + localStorage.fbId + "&pid=" + val.id + "&like=1" + '>LIKE</a>' +
 					'<a class="show unlikeStar" href=' + "http://web.thu.edu.tw/s955740/www/fb/like.php?uid=" + localStorage.fbId + "&pid=" + val.id + "&like=0" + '>UNLIKE</a>' +					
-					'</h3>'+
-					'	<p>店家地址：<a href="http://maps.google.com.tw/?q=台南市'+val["區別"]+val["地址"]+'" target="_blank">台南市'+val["區別"]+val["地址"]+'</a><br />'+
+					'	店家地址：<a href="http://maps.google.com.tw/?q=台南市'+val["區別"]+val["地址"]+'" target="_blank">台南市'+val["區別"]+val["地址"]+'</a><br />'+
 					'	店家電話：<a href="tel:'+val["電話"]+'">'+val["電話"]+'</a>'+
 					'	</p>'+
 					'</div>'
@@ -148,12 +144,12 @@ var app = {
 			
 			$.each(data, function(key, val) {
 				$("#nightmarket").append(
-					'<li><a href="'+val["地圖"]+'" target="_blank">'+val["區別"]+' - '+val["夜市名"]+'</a>' +
+					'<li id="nightmarket-'+key+'"><a href="'+val["地圖"]+'" target="_blank">'+val["夜市名"]+'</a>' +
 					'<span>' +
 					'<a class="show likeStar" href=' + "http://web.thu.edu.tw/s955740/www/fb/like.php?uid=" + localStorage.fbId + "&pid=" + val.id + "&like=1" + '>LIKE</a>' +
 					'<a class="show unlikeStar" href=' + "http://web.thu.edu.tw/s955740/www/fb/like.php?uid=" + localStorage.fbId + "&pid=" + val.id + "&like=0" + '>UNLIKE</a>' +					
 					'</span>' +
-					'</li>'
+					'</li>'					 
 				)
 				if(key == data.length - 1) {
 					$("#nightmarket").listview("refresh");
@@ -172,11 +168,10 @@ var app = {
 			$.each(data, function(key, val) {
 				$("#interestingPlace").append(
 					'<div data-role="collapsible">'+
-					'	<h3>'+val["個案名稱"]+
-					'<a class="show likeStar" href=' + "http://web.thu.edu.tw/s955740/www/fb/like.php?uid=" + localStorage.fbId + "&pid=" + val.id + "&like=1" + '>LIKE</a>' +
+					'	<h3 id="interestingPlace-'+key+'">'+val["個案名稱"]+'</h3>'+
+					'<p><a class="show likeStar" href=' + "http://web.thu.edu.tw/s955740/www/fb/like.php?uid=" + localStorage.fbId + "&pid=" + val.id + "&like=1" + '>LIKE</a>' +
 					'<a class="show unlikeStar" href=' + "http://web.thu.edu.tw/s955740/www/fb/like.php?uid=" + localStorage.fbId + "&pid=" + val.id + "&like=0" + '>UNLIKE</a>' +					
-					'</h3>'+
-					'	<p>種類級別：'+val["種類"]+' '+val["級別"]+'<br />'+
+					'	種類級別：'+val["種類"]+' '+val["級別"]+'<br />'+
 					'		地理位置：<a href="http://maps.google.com/?q='+val["所在地理區域-縣市"]+val["所在地理區域-鄉鎮市"]+val["地址或位置"]+'">'+val["所在地理區域-縣市"]+val["所在地理區域-鄉鎮市"]+val["地址或位置"]+'</a>'+
 					'		歷史沿革：<br />　　'+val["歷史沿革"]+
 					'	</p>'+
@@ -196,12 +191,12 @@ var app = {
 			
 			$.each(data, function(key, val) {
 				$("#temple").append(
-					'<li><a href="http://maps.google.com/?q='+val["地址"]+'" target="_blank">'+val["行政區"]+' - '+val["寺廟名稱"]+'</a>' +
+					'<li id="interestingPlace-'+key+'"><a href="http://maps.google.com/?q='+val["地址"]+'" target="_blank">'+val["寺廟名稱"]+'</a>'
 					'<span>' +
 					'<a class="show likeStar" href=' + "http://web.thu.edu.tw/s955740/www/fb/like.php?uid=" + localStorage.fbId + "&pid=" + val.id + "&like=1" + '>LIKE</a>' +
 					'<a class="show unlikeStar" href=' + "http://web.thu.edu.tw/s955740/www/fb/like.php?uid=" + localStorage.fbId + "&pid=" + val.id + "&like=0" + '>UNLIKE</a>' +					
-					'</span>' +					
-					'</li>'
+					'</span>' +	
+					'</li>'				
 				)
 				if(key == data.length - 1) {
 					$("#temple").listview("refresh");
@@ -213,21 +208,20 @@ var app = {
 	},
 	service: {
 		toilet: function (data) {
-			var data = data || window["toilet"];
+			var data = data || window["toilet"].result.records;
 			$("#main").append('<ul id="toilet" data-role="listview" data-filter="true" data-input="#search" data-inset="true"></ul>');
 			$("#toilet").listview();
 			
-			$.each(data.result.records, function(key, val) {
+			$.each(data, function(key, val) {
 				$("#toilet").append(
-					'<li><a href="http://maps.google.com/?q='+val["地址或地點描述"]+'" target="_blank">'+val["最新公廁級別"]+' - '+val["公廁名稱"]+'</a>'+ 
+					'<li id="toilet-'+key+'"><a href="http://maps.google.com/?q='+val["地址或地點描述"]+'" target="_blank">'+val["公廁名稱"]+'</a>'// +val["縣市名稱"]+'+'+val["鄉鎮名稱"]+'+'+val["村里名稱"]+'+'
 					'<span>' +
 					'<a class="show likeStar" href=' + "http://web.thu.edu.tw/s955740/www/fb/like.php?uid=" + localStorage.fbId + "&pid=" + val.id + "&like=1" + '>LIKE</a>' +
 					'<a class="show unlikeStar" href=' + "http://web.thu.edu.tw/s955740/www/fb/like.php?uid=" + localStorage.fbId + "&pid=" + val.id + "&like=0" + '>UNLIKE</a>' +					
-					'</span>' +					
-					'</li>'
-					// +val["縣市名稱"]+'+'+val["鄉鎮名稱"]+'+'+val["村里名稱"]+'+'
+					'</span>' +
+					'</li>'		
 				)
-				if(key == data.result.records.length - 1) {
+				if(key == data.length - 1) {
 					$("#toilet").listview("refresh");
 				}
 			});
@@ -241,11 +235,11 @@ var app = {
 			
 			$.each(data, function(key, val) {
 				$("#wifi").append(
-					'<li><a href="http://maps.google.com/?q='+val["熱點地址"]+'" target="_blank">'+val["台南市地區"]+' - '+val["臺南市無線網路熱點名稱"]+'</a>'+
+					'<li id="wifi-'+key+'"><a href="http://maps.google.com/?q='+val["熱點地址"]+'" target="_blank">'+val["臺南市無線網路熱點名稱"]+'</a>'
 					'<span>' +
 					'<a class="show likeStar" href=' + "http://web.thu.edu.tw/s955740/www/fb/like.php?uid=" + localStorage.fbId + "&pid=" + val.id + "&like=1" + '>LIKE</a>' +
 					'<a class="show unlikeStar" href=' + "http://web.thu.edu.tw/s955740/www/fb/like.php?uid=" + localStorage.fbId + "&pid=" + val.id + "&like=0" + '>UNLIKE</a>' +					
-					'</span>' +					
+					'</span>' +	
 					'</li>'
 				)
 				if(key == data.length - 1) {
