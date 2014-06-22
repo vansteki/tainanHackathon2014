@@ -95,7 +95,7 @@ $(function() {
         }
     });
     
-    var iniSearch = function() {
+    var iniSearch = function() {	
         var defaultFuseOpt = {
             keys: [],
             threshold: 0.1
@@ -129,4 +129,6 @@ $(function() {
         });
     };
     iniSearch();
+	
+
 });

@@ -1,3 +1,39 @@
+var likeStar = function() {
+	$('.likeStar').click(function(e) {
+	   var req = $(this).attr('href');
+	   console.log('star was clicked')
+		e.preventDefault(); 
+		e.stopPropagation();
+		$.ajax({
+		  url: req,
+		  method: 'GET',
+		  success: function(data){
+			console.log(data)
+		  },
+		  error: function(err){
+			console.log(err)
+		  }   
+		});
+	});
+};
+var unlikeStar = function() {
+	$('.unlikeStar').click(function(e) {
+	   var req = $(this).attr('href');
+	   console.log('star was clicked')
+		e.preventDefault(); 
+		e.stopPropagation();
+		$.ajax({
+		  url: req,
+		  method: 'GET',
+		  success: function(data){
+			console.log(data)
+		  },
+		  error: function(err){
+			console.log(err)
+		  }   
+		});
+	});
+};
 var app = {
 	init: function () {
 
@@ -62,7 +98,11 @@ var app = {
 				
 				$("#dining").append(
 					'<div data-role="collapsible">'+
-					'	<h3>'+val["餐飲店家名稱"]+'</h3>'+//table+
+					'<h3>'+val["餐飲店家名稱"] + 
+					'<a class="show likeStar" href=' + "http://web.thu.edu.tw/s955740/www/fb/like.php?uid=" + localStorage.fbId + "&pid=" + val.id + "&like=1" + '>LIKE</a>' +
+					'<a class="show unlikeStar" href=' + "http://web.thu.edu.tw/s955740/www/fb/like.php?uid=" + localStorage.fbId + "&pid=" + val.id + "&like=0" + '>UNLIKE</a>' +
+
+					'</h3>'+//table+
 					'	<p>營業時間：'+bd[7]+'<br />'+
 					'		店家地址：<a href="http://maps.google.com.tw/?q='+val["店家地址"]+'" target="_blank">'+val["店家地址"]+'</a><br />'+
 					'		店家電話：<a href="tel:'+val["店家電話"]+'">'+val["店家電話"]+'</a>'+
@@ -73,7 +113,9 @@ var app = {
 				if(key == data.length - 1) {
 					$("#dining").collapsibleset("refresh");
 				}
-			})
+			});
+			likeStar();
+			unlikeStar();
 		},
 		restaurant: function (data) {
 			var data = data || window["restaurant"];
@@ -83,7 +125,10 @@ var app = {
 			$.each(data, function(key, val) { //data.result.records
 				$("#restaurant").append(
 					'<div data-role="collapsible">'+
-					'	<h3>'+val["餐廳名稱"]+'</h3>'+
+					'	<h3>'+val["餐廳名稱"]+
+					'<a class="show likeStar" href=' + "http://web.thu.edu.tw/s955740/www/fb/like.php?uid=" + localStorage.fbId + "&pid=" + val.id + "&like=1" + '>LIKE</a>' +
+					'<a class="show unlikeStar" href=' + "http://web.thu.edu.tw/s955740/www/fb/like.php?uid=" + localStorage.fbId + "&pid=" + val.id + "&like=0" + '>UNLIKE</a>' +					
+					'</h3>'+
 					'	<p>店家地址：<a href="http://maps.google.com.tw/?q=台南市'+val["區別"]+val["地址"]+'" target="_blank">台南市'+val["區別"]+val["地址"]+'</a><br />'+
 					'	店家電話：<a href="tel:'+val["電話"]+'">'+val["電話"]+'</a>'+
 					'	</p>'+
@@ -92,7 +137,9 @@ var app = {
 				if(key == data.length - 1) { //result.records.length
 					$("#restaurant").collapsibleset("refresh");
 				}
-			})
+			});
+			likeStar();
+			unlikeStar();			
 		},
 		nightmarket: function (data) {
 			var data = data || window["nightmarket"];
@@ -101,12 +148,19 @@ var app = {
 			
 			$.each(data, function(key, val) {
 				$("#nightmarket").append(
-					'<li><a href="'+val["地圖"]+'" target="_blank">'+val["區別"]+' - '+val["夜市名"]+'</a></li>'
+					'<li><a href="'+val["地圖"]+'" target="_blank">'+val["區別"]+' - '+val["夜市名"]+'</a>' +
+					'<span>' +
+					'<a class="show likeStar" href=' + "http://web.thu.edu.tw/s955740/www/fb/like.php?uid=" + localStorage.fbId + "&pid=" + val.id + "&like=1" + '>LIKE</a>' +
+					'<a class="show unlikeStar" href=' + "http://web.thu.edu.tw/s955740/www/fb/like.php?uid=" + localStorage.fbId + "&pid=" + val.id + "&like=0" + '>UNLIKE</a>' +					
+					'</span>' +
+					'</li>'
 				)
 				if(key == data.length - 1) {
 					$("#nightmarket").listview("refresh");
 				}
 			});
+			likeStar();
+			unlikeStar();			
 		}
 	},
 	spot: {
@@ -118,7 +172,10 @@ var app = {
 			$.each(data, function(key, val) {
 				$("#interestingPlace").append(
 					'<div data-role="collapsible">'+
-					'	<h3>'+val["個案名稱"]+'</h3>'+
+					'	<h3>'+val["個案名稱"]+
+					'<a class="show likeStar" href=' + "http://web.thu.edu.tw/s955740/www/fb/like.php?uid=" + localStorage.fbId + "&pid=" + val.id + "&like=1" + '>LIKE</a>' +
+					'<a class="show unlikeStar" href=' + "http://web.thu.edu.tw/s955740/www/fb/like.php?uid=" + localStorage.fbId + "&pid=" + val.id + "&like=0" + '>UNLIKE</a>' +					
+					'</h3>'+
 					'	<p>種類級別：'+val["種類"]+' '+val["級別"]+'<br />'+
 					'		地理位置：<a href="http://maps.google.com/?q='+val["所在地理區域-縣市"]+val["所在地理區域-鄉鎮市"]+val["地址或位置"]+'">'+val["所在地理區域-縣市"]+val["所在地理區域-鄉鎮市"]+val["地址或位置"]+'</a>'+
 					'		歷史沿革：<br />　　'+val["歷史沿革"]+
@@ -128,7 +185,9 @@ var app = {
 				if(key == data.length - 1) {
 					$("#interestingPlace").collapsibleset("refresh");
 				}
-			})
+			});
+			likeStar();
+			unlikeStar();			
 		},
 		temple: function (data) {
 			var data = data || window["temple"];
@@ -137,12 +196,19 @@ var app = {
 			
 			$.each(data, function(key, val) {
 				$("#temple").append(
-					'<li><a href="http://maps.google.com/?q='+val["地址"]+'" target="_blank">'+val["行政區"]+' - '+val["寺廟名稱"]+'</a></li>'
+					'<li><a href="http://maps.google.com/?q='+val["地址"]+'" target="_blank">'+val["行政區"]+' - '+val["寺廟名稱"]+'</a>' +
+					'<span>' +
+					'<a class="show likeStar" href=' + "http://web.thu.edu.tw/s955740/www/fb/like.php?uid=" + localStorage.fbId + "&pid=" + val.id + "&like=1" + '>LIKE</a>' +
+					'<a class="show unlikeStar" href=' + "http://web.thu.edu.tw/s955740/www/fb/like.php?uid=" + localStorage.fbId + "&pid=" + val.id + "&like=0" + '>UNLIKE</a>' +					
+					'</span>' +					
+					'</li>'
 				)
 				if(key == data.length - 1) {
 					$("#temple").listview("refresh");
 				}
-			})
+			});
+			likeStar();
+			unlikeStar();
 		}
 	},
 	service: {
@@ -153,12 +219,20 @@ var app = {
 			
 			$.each(data.result.records, function(key, val) {
 				$("#toilet").append(
-					'<li><a href="http://maps.google.com/?q='+val["地址或地點描述"]+'" target="_blank">'+val["最新公廁級別"]+' - '+val["公廁名稱"]+'</a></li>'// +val["縣市名稱"]+'+'+val["鄉鎮名稱"]+'+'+val["村里名稱"]+'+'
+					'<li><a href="http://maps.google.com/?q='+val["地址或地點描述"]+'" target="_blank">'+val["最新公廁級別"]+' - '+val["公廁名稱"]+'</a>'+ 
+					'<span>' +
+					'<a class="show likeStar" href=' + "http://web.thu.edu.tw/s955740/www/fb/like.php?uid=" + localStorage.fbId + "&pid=" + val.id + "&like=1" + '>LIKE</a>' +
+					'<a class="show unlikeStar" href=' + "http://web.thu.edu.tw/s955740/www/fb/like.php?uid=" + localStorage.fbId + "&pid=" + val.id + "&like=0" + '>UNLIKE</a>' +					
+					'</span>' +					
+					'</li>'
+					// +val["縣市名稱"]+'+'+val["鄉鎮名稱"]+'+'+val["村里名稱"]+'+'
 				)
 				if(key == data.result.records.length - 1) {
 					$("#toilet").listview("refresh");
 				}
-			})
+			});
+			likeStar();
+			unlikeStar();			
 		},
 		wifi: function (data) {
 			var data = data || window["wifi"];
@@ -167,12 +241,20 @@ var app = {
 			
 			$.each(data, function(key, val) {
 				$("#wifi").append(
-					'<li><a href="http://maps.google.com/?q='+val["熱點地址"]+'" target="_blank">'+val["台南市地區"]+' - '+val["臺南市無線網路熱點名稱"]+'</a></li>'
+					'<li><a href="http://maps.google.com/?q='+val["熱點地址"]+'" target="_blank">'+val["台南市地區"]+' - '+val["臺南市無線網路熱點名稱"]+'</a>'+
+					'<span>' +
+					'<a class="show likeStar" href=' + "http://web.thu.edu.tw/s955740/www/fb/like.php?uid=" + localStorage.fbId + "&pid=" + val.id + "&like=1" + '>LIKE</a>' +
+					'<a class="show unlikeStar" href=' + "http://web.thu.edu.tw/s955740/www/fb/like.php?uid=" + localStorage.fbId + "&pid=" + val.id + "&like=0" + '>UNLIKE</a>' +					
+					'</span>' +					
+					'</li>'
 				)
 				if(key == data.length - 1) {
 					$("#wifi").listview("refresh");
 				}
-			})
+			});
+			likeStar();
+			unlikeStar();
+			
 		}
 	}
 };
