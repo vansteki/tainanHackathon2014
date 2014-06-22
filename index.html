@@ -21,20 +21,20 @@
 			font-size: 18px;
 			line-height: 36px;
 		}
-		#mask {
-			width: 100%;
-			height: 100%;
-			background-color: grey;
-			opacity: .5;
-		}
 	</style>
 </head>
 <body>
 	<div data-role="page">
+		<div id="history_panel" data-role="panel" data-position="right" data-display="overlay">
+			<ul data-role="listview">
+			</ul>
+		</div>
         <div data-role="header">
-        	<div data-role="navbar">
+        	<div data-role="navbar" data-iconpos="top">
                 <ul>
-                    <li><a id="home" href="#" class="ui-btn ui-icon-home ui-btn-icon-top hidden"><h4>台南便利旅遊快搜</h4></a></li>
+                	<li><a href="#" data-icon="star">我的最愛</a></li>
+                    <li><a id="home" href="#" data-icon="home">回到首頁</a></li>
+                    <li><a id="history" href="#" data-icon="tag">瀏覽歷史</a></li>
                 </ul>
             </div>
         </div>
